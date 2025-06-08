@@ -1,5 +1,6 @@
 /* Home.module.css */
 
+/* Estilos globales del contenedor principal */
 .container {
   position: relative;
   min-height: 100vh;
@@ -7,6 +8,7 @@
   flex-direction: column;
 }
 
+/* Estilos para la imagen de fondo estática */
 .background {
   position: fixed;
   top: 0;
@@ -18,6 +20,7 @@
   z-index: -2;
 }
 
+/* Estilos para el degradado de fondo que cubre la imagen */
 .backgroundGradient {
   position: absolute;
   top: 0;
@@ -28,6 +31,7 @@
   z-index: -1;
 }
 
+/* Estilos para el contenido principal que se superpone al fondo */
 .mainContent {
   position: relative;
   z-index: 1;
@@ -36,6 +40,7 @@
   min-height: 100vh;
 }
 
+/* Estilos para el encabezado (header) */
 .header {
   display: flex;
   justify-content: space-between;
@@ -52,6 +57,7 @@
   z-index: 100;
 }
 
+/* Estilos para la lista de navegación */
 .navList {
   display: flex;
   list-style: none;
@@ -60,6 +66,7 @@
   padding: 0;
 }
 
+/* Estilos para los botones de navegación */
 .navButton {
   background: none;
   border: none;
@@ -74,24 +81,15 @@
   color: #a0a0a0;
 }
 
-/* User Info Styles */
+/* Estilos para la información del usuario */
 .userInfo {
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.userAvatar {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 9999px;
-  border: 1px solid #9ca3af;
-  background-color: #374151;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #9ca3af;
-  font-size: 0.875rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
 }
 
 .userDetails {
@@ -121,108 +119,153 @@
   color: #d1d5db;
 }
 
-/* Flex container for sidebars and main content */
-.flex-1 {
-  flex: 1;
+/* New: Container for the central section (sidebars + main content area) */
+.centerSection {
   display: flex;
-  overflow: hidden;
+  flex: 1; /* Allows it to take up available space between header and footer */
+  justify-content: center; /* Center the entire block horizontally */
+  align-items: flex-start; /* Align items to the top */
+  padding: 2rem 1rem; /* Add some padding around the central elements */
+  gap: 2rem; /* Space between sidebars and content area */
 }
 
-/* Sidebar Left Styles */
+/* LEFT SIDEBAR */
 .sidebarLeft {
-  width: 150px;
-  padding: 1rem;
+  width: 250px;
+  /* Removed height: 100% to allow it to size based on content and align to top */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.sidebarButtonsWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
+  justify-content: flex-start; /* Align content to the top */
   align-items: center;
+  /* border: 2px solid lime; /* For debugging */
+  flex-shrink: 0; /* Asegura que no se encoja a menos que sea necesario */
 }
 
-.sidebarButton {
-  width: 80%;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  color: white;
+/* New div for the information box on the left */
+.infoBoxLeft {
+  width: 100%;
+  height: 300px; /* Adjust height as needed for content */
+  background-color: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  text-align: center;
-}
-
-/* Glass Effect for Sidebar Buttons */
-.glassEffect {
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.glassEffect:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-/* Content Area Styles */
-.contentArea {
-  flex: 1;
+  border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-  overflow-y: auto;
-  padding-top: 0;
-}
-
-/* Pedestal y Carta */
-.pedestalContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 70vh;
-  position: relative;
-  margin-bottom: 2rem;
-  flex-shrink: 0;
+  align-items: center;
+  color: white;
+  font-size: 1.2rem;
+  padding: 1rem;
 }
 
+
+/* Estilos para el área de contenido central (main) */
+.contentArea {
+  flex: 1; /* Ocupa el espacio restante entre las sidebars */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente el pedestal y la carta */
+  padding: 0 2rem; /* Adjusted padding */
+  overflow-y: visible; /* Let scrollableContent handle its own scroll */
+  /* border: 2px solid yellow; /* For debugging - main content area */
+}
+
+/* Título "Destacados" */
+.featuredTitle {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 0; /* Reset margin top as it's now controlled by parent .centerSection padding */
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+/* Contenedor para el pedestal */
+.pedestalContainer {
+  width: 600px; /* <--- MODIFICAR: Ancho del contenedor del pedestal */
+  height: 400px; /* <--- MODIFICAR: Alto del contenedor del pedestal */
+  position: relative;
+  flex-shrink: 0;
+  perspective: 1000px;
+  margin-top: 0;
+  margin-bottom: 5rem;
+  /* border: 2px solid yellow; /* For debugging - yellow box */
+}
+
+/* Estilos para el pedestal (imagen SVG) */
 .pedestal {
-  width: 70%;
-  height: 50%;
-  background-image: url('/elementos/pedestal.svg'); /* <--- ¡RUTA CORREGIDA AQUÍ! */
+  width: 100%; /* <--- Puedes ajustar a un valor fijo si no quieres que sea 100% del contenedor */
+  height: 100%; /* <--- Puedes ajustar a un valor fijo si no quieres que sea 100% del contenedor */
+  background-image: url('/elementos/pedestal.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center bottom;
   position: absolute;
-  bottom: 0;
+  top: 30%;
+  bottom: 0; /* <--- MODIFICAR: Posición vertical del pedestal (desde abajo) */
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 
-.tcgCard {
-  width: 25%;
-  max-height: 70%;
-  object-fit: contain;
+/* Contenedor principal para la carta que va a rotar */
+.cardFlipContainer {
+  width: 200px; /* <--- MODIFICAR: Ancho de la carta */
+  /* height: 0; */ /* Esto calcula el alto automáticamente con padding-bottom, si quieres un alto fijo puedes descomentar y ajustar */
+  padding-bottom: calc(250px * 1.4); /* <--- Si cambias el width, ajusta este valor si quieres mantener la proporción */
   position: absolute;
-  top: -25%; /* Ajustado un poco más arriba como solicitaste en el mensaje anterior */
-  transform: translateY(-80px);
-  transition: transform 0.5s ease-out, opacity 0.5s ease-in-out;
+  top: -10%; /* <--- MODIFICAR: Posición vertical de la carta (desde arriba del pedestalContainer) */
+  /* También puedes usar 'bottom', 'left', 'right' para posicionamiento absoluto */
+  /* left: 50%; */ /* Ejemplo para centrar horizontalmente */
+  /* transform: translateX(-50%); */ /* Complemento para centrar horizontalmente con 'left: 50%' */
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease;
+  cursor: pointer;
+  z-index: 5;
+  /* border: 2px solid red; /* For debugging - red box */
 }
 
-/* Indicadores del Carrusel de Cartas */
+
+.cardFlipContainer:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0), 0 0 25px rgba(255, 255, 255, 0) inset;
+}
+
+/* Estilos comunes para ambas caras de la carta (anverso y reverso) */
+.cardFront,
+.cardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0);
+}
+
+/* Estilos para la cara delantera de la carta */
+.cardFront {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+/* Estilos para la cara trasera de la carta */
+.cardBack {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* Estilos para las imágenes dentro de las caras (anverso/reverso) */
+.tcgCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Indicadores del Carrusel de Cartas (los puntos de navegación) */
 .cardCarouselIndicators {
   position: absolute;
-  bottom: 5%;
+  bottom: 10%;
   display: flex;
   gap: 0.5rem;
   z-index: 10;
@@ -241,51 +284,148 @@
   background-color: yellow;
 }
 
-/* Contenido Scrollable */
+/* Contenido desplazable (scrollable) debajo del pedestal */
 .scrollableContent {
   width: 100%;
   padding: 2rem;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
-  margin-top: -2rem;
-}
-
-/* Sidebar Right Styles */
-.sidebarRight {
-  width: 250px;
-  padding: 1rem;
+  margin-top: 0; /* Removed fixed margin-top */
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  /* border: 2px solid blue; /* For debugging - blue box */
 }
 
-/* Carousel Container Styles */
+/* RIGHT SIDEBAR */
+.sidebarRight {
+  width: 250px;
+  /* Removed height: 100% */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to the top */
+  align-items: center;
+  /* border: 2px solid lime; /* For debugging */
+  flex-shrink: 0; /* Asegura que no se encoja a menos que sea necesario */
+}
+
+/* CARRUSEL DE AMIGOS DENTRO DE LA SIDEBAR DERECHA */
 .carouselContainer {
-  position: sticky;
-  top: calc(50vh + 50px);
   width: 100%;
-  height: 200px;
+  height: 300px; /* Adjust height as needed for content */
   overflow: hidden;
   border-radius: 0.5rem;
   background-color: rgba(0, 0, 0, 0.3);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: auto;
+  margin-top: 0;
+}
+
+.friendsText {
+  color: white;
+  font-size: 0.8rem;
+  margin-bottom: 0.2rem;
+  text-align: center;
 }
 
 .carouselImage {
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   object-fit: cover;
+  border-radius: 0.3rem;
   transition: opacity 0.5s ease-in-out;
 }
 
-/* Footer Styles */
+/* Estilos para el pie de página (footer) */
 .footer {
   background-color: rgba(0, 0, 0, 0.7);
   height: 50px;
   margin-top: auto;
+}
+
+/* ========================================= */
+/* Media Queries para Responsividad          */
+/* ========================================= */
+
+/* Para pantallas más pequeñas (ej. tabletas y móviles) */
+@media (max-width: 1024px) { /* Puedes ajustar este breakpoint a tu gusto */
+  .centerSection {
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: center;   /* Centra los elementos apilados */
+    gap: 1rem; /* Reduce el espacio entre elementos apilados */
+    padding: 1rem; /* Ajusta el padding general */
+  }
+
+  .sidebarLeft,
+  .sidebarRight {
+    width: 90%; /* Las barras laterales ocupan casi todo el ancho */
+    margin-top: 1rem; /* Espacio superior para separarlos del contenido previo */
+    order: 2; /* Les da un orden para que aparezcan después del contentArea */
+    height: auto; /* Permite que la altura se ajuste al contenido */
+  }
+
+  .contentArea {
+    width: 100%; /* El área de contenido principal ocupa todo el ancho */
+    padding: 0 1rem; /* Ajusta el padding para pantallas pequeñas */
+    order: 1; /* Le da el orden para que aparezca primero */
+  }
+
+  /* Ajustes específicos para los contenedores dentro de las sidebars si es necesario */
+  .infoBoxLeft,
+  .carouselContainer {
+    width: 100%; /* Asegura que su contenido se ajuste al ancho de la sidebar */
+    height: auto; /* La altura se ajusta al contenido para que no desaparezca */
+    min-height: 150px; /* Un mínimo para que siempre sea visible */
+    padding: 1rem;
+  }
+}
+
+/* Si quieres un breakpoint adicional para móviles muy pequeños */
+@media (max-width: 768px) {
+  .header {
+    padding: 0.5rem 1rem;
+    flex-direction: column; /* Apila los elementos del header (logo, nav, user) */
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .navList {
+    flex-wrap: wrap; /* Permite que los botones de navegación se envuelvan */
+    justify-content: center;
+    gap: 0.8rem;
+  }
+
+  .navButton {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
+  }
+
+  .pedestalContainer {
+    width: 95%; /* Adapta el pedestal a la pantalla del móvil */
+    height: auto; /* Permite que la altura se ajuste proporcionalmente */
+    padding-bottom: 60%; /* Relación de aspecto para el pedestal */
+    margin-bottom: 2rem;
+  }
+
+  .pedestal {
+    top: 10%; /* Ajusta la posición del pedestal si es necesario */
+  }
+
+  .cardFlipContainer {
+    width: 150px; /* Reduce el tamaño de la carta para móviles */
+    padding-bottom: calc(150px * 1.4); /* Mantiene la proporción de la carta */
+    top: 5%; /* Ajusta la posición vertical de la carta sobre el pedestal */
+  }
+
+  .featuredTitle {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .scrollableContent {
+    padding: 1rem;
+  }
 }
