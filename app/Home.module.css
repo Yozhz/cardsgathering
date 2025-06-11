@@ -1,11 +1,33 @@
 /* Home.module.css */
 
+/*
+  ==============================================================
+  INICIO: Definición de la fuente local "Titania Regular"
+  ==============================================================
+  Asegúrate de que tus archivos de fuente (ej. Titania-Regular.woff2)
+  estén en la ruta `public/fonts/` de tu proyecto.
+*/
+@font-face {
+  font-family: 'Titania Regular'; /* Nombre que usarás para aplicar la fuente */
+  src: url('/fonts/Titania-Regular.woff2') format('woff2'),
+       url('/fonts/Titania-Regular.woff') format('woff'); /* Incluye otros formatos si los tienes */
+  font-weight: normal; /* Ajusta esto si tu fuente tiene un peso específico (ej. 400) */
+  font-style: normal;
+  font-display: swap; /* Estrategia de carga para una mejor UX */
+}
+/*
+  ==============================================================
+  FIN: Definición de la fuente local "Titania Regular"
+  ==============================================================
+*/
+
+
 /* Estilos globales del contenedor principal */
 .container {
   position: relative;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  display: flex; /* NUEVO: Usa flexbox para el contenedor */
+  flex-direction: column; /* NUEVO: Apila los hijos verticalmente */
 }
 
 /* Estilos para la imagen de fondo estática */
@@ -37,7 +59,8 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  flex: 1; /* NUEVO: Permite que mainContent crezca y empuje el pie de página hacia abajo */
+  /* min-height: 100vh; -- ELIMINADO: Esto causaba el problema, mainContent ya no necesita ser 100vh */
 }
 
 /* Estilos para el encabezado (header) */
@@ -66,8 +89,8 @@
   padding: 0;
 }
 
-/* Estilos para los botones de navegación */
-.navButton {
+/* Estilos para los botones de navegación (HEADER - NORMAL STYLE) */
+.navButton { /* Esto ahora solo apunta a los botones de navegación del encabezado */
   background: none;
   border: none;
   color: white;
@@ -75,6 +98,8 @@
   cursor: pointer;
   padding: 0.5rem 1rem;
   transition: color 0.3s ease;
+  font-family: 'Titania Regular', sans-serif;
+  font-weight: normal;
 }
 
 .navButton:hover {
@@ -119,32 +144,31 @@
   color: #d1d5db;
 }
 
-/* New: Container for the central section (sidebars + main content area) */
+/* Nuevo: Contenedor para la sección central (barras laterales + área de contenido principal) */
 .centerSection {
   display: flex;
-  flex: 1; /* Allows it to take up available space between header and footer */
-  justify-content: center; /* Center the entire block horizontally */
-  align-items: flex-start; /* Align items to the top */
-  padding: 2rem 1rem; /* Add some padding around the central elements */
-  gap: 2rem; /* Space between sidebars and content area */
+  flex: 1; /* Permite que crezca */
+  justify-content: center;
+  align-items: flex-start; /* Alinea el contenido desde la parte superior */
+  padding: 2rem 1rem;
+  gap: 2rem;
 }
 
-/* LEFT SIDEBAR */
+/* BARRA LATERAL IZQUIERDA - Solo para escritorio */
 .sidebarLeft {
   width: 250px;
-  /* Removed height: 100% to allow it to size based on content and align to top */
-  display: flex;
+  display: flex; /* Mostrar en escritorio */
   flex-direction: column;
-  justify-content: flex-start; /* Align content to the top */
+  justify-content: flex-start;
   align-items: center;
-  /* border: 2px solid lime; /* For debugging */
-  flex-shrink: 0; /* Asegura que no se encoja a menos que sea necesario */
+  flex-shrink: 0;
+  order: 1; /* Orden predeterminada para escritorio */
 }
 
-/* New div for the information box on the left */
+/* Nuevo div para el cuadro de información a la izquierda (escritorio) */
 .infoBoxLeft {
   width: 100%;
-  height: 300px; /* Adjust height as needed for content */
+  height: 300px;
   background-color: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.5rem;
@@ -157,16 +181,22 @@
   padding: 1rem;
 }
 
+/* Ocultar el cuadro de información solo para escritorio en pantallas pequeñas */
+.desktopOnly {
+  display: flex; /* Por defecto para escritorio */
+}
+
 
 /* Estilos para el área de contenido central (main) */
 .contentArea {
-  flex: 1; /* Ocupa el espacio restante entre las sidebars */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra horizontalmente el pedestal y la carta */
-  padding: 0 2rem; /* Adjusted padding */
-  overflow-y: visible; /* Let scrollableContent handle its own scroll */
-  /* border: 2px solid yellow; /* For debugging - main content area */
+  align-items: center;
+  padding: 0 2rem;
+  overflow-y: visible;
+  position: relative;
+  order: 2; /* Orden predeterminada para escritorio */
 }
 
 /* Título "Destacados" */
@@ -174,59 +204,69 @@
   color: white;
   font-size: 2.5rem;
   font-weight: bold;
-  margin-top: 0; /* Reset margin top as it's now controlled by parent .centerSection padding */
+  margin-top: 0;
   margin-bottom: 0.5rem;
   text-shadow: 0 0 10px rgba(0,0,0,0.7);
+  font-family: 'Titania Regular', sans-serif;
+  font-weight: normal;
+}
+
+/* Envoltorio para la carta, el pedestal y los botones laterales */
+.cardCarouselWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column; /* Apila el pedestal y la carta */
+  align-items: center;
+  width: 600px; /* Ancho máximo para escritorio */
+  height: 480px; /* Proporciona espacio para la carta y el pedestal */
+  margin-top: 1rem;
+  margin-bottom: 2rem; /* Ajustado para el espaciado general */
 }
 
 /* Contenedor para el pedestal */
 .pedestalContainer {
-  width: 600px; /* <--- MODIFICAR: Ancho del contenedor del pedestal */
-  height: 400px; /* <--- MODIFICAR: Alto del contenedor del pedestal */
+  width: 100%;
+  height: 100%; /* Permite que el pedestal ocupe toda la altura para el posicionamiento */
   position: relative;
-  flex-shrink: 0;
-  perspective: 1000px;
-  margin-top: 0;
-  margin-bottom: 5rem;
-  /* border: 2px solid yellow; /* For debugging - yellow box */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Alinea la imagen del pedestal a la parte inferior */
+  perspective: 1000px; /* Para el efecto 3D de la carta */
 }
 
 /* Estilos para el pedestal (imagen SVG) */
 .pedestal {
-  width: 100%; /* <--- Puedes ajustar a un valor fijo si no quieres que sea 100% del contenedor */
-  height: 100%; /* <--- Puedes ajustar a un valor fijo si no quieres que sea 100% del contenedor */
-  background-image: url('/elementos/pedestal.svg');
+  width: 100%;
+  height: 100%; /* Ocupa todo el espacio de pedestalContainer */
+  background-image: url('/elementos/pedestal01.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center bottom;
-  position: absolute;
-  top: 30%;
-  bottom: 0; /* <--- MODIFICAR: Posición vertical del pedestal (desde abajo) */
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  background-position: center bottom; /* Asegura que el pedestal esté en la parte inferior */
+  position: absolute; /* Posición dentro de pedestalContainer */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1; /* Detrás de la carta */
 }
 
 /* Contenedor principal para la carta que va a rotar */
 .cardFlipContainer {
-  width: 200px; /* <--- MODIFICAR: Ancho de la carta */
-  /* height: 0; */ /* Esto calcula el alto automáticamente con padding-bottom, si quieres un alto fijo puedes descomentar y ajustar */
-  padding-bottom: calc(250px * 1.4); /* <--- Si cambias el width, ajusta este valor si quieres mantener la proporción */
+  width: 240px;
+  padding-bottom: calc(240px * 1.4); /* Mantiene la relación de aspecto */
   position: absolute;
-  top: -10%; /* <--- MODIFICAR: Posición vertical de la carta (desde arriba del pedestalContainer) */
-  /* También puedes usar 'bottom', 'left', 'right' para posicionamiento absoluto */
-  /* left: 50%; */ /* Ejemplo para centrar horizontalmente */
-  /* transform: translateX(-50%); */ /* Complemento para centrar horizontalmente con 'left: 50%' */
+  /* === AQUÍ ES DONDE CONTROLAS LA ALTURA DE LA CARTA === */
+  top: 8%; /* Ajusta este valor para posicionar la carta sobre el pedestal */
+  /* === =========================================== === */
+  left: 50%;
+  transform: translateX(-50%); /* Centra horizontalmente */
   transform-style: preserve-3d;
   transition: transform 0.3s ease-out, box-shadow 0.3s ease;
   cursor: pointer;
-  z-index: 5;
-  /* border: 2px solid red; /* For debugging - red box */
+  z-index: 5; /* Encima del pedestal */
 }
 
-
 .cardFlipContainer:hover {
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0), 0 0 25px rgba(255, 255, 255, 0) inset;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.377), 0 0 25px rgba(255, 255, 255, 0) inset;
 }
 
 /* Estilos comunes para ambas caras de la carta (anverso y reverso) */
@@ -264,11 +304,12 @@
 
 /* Indicadores del Carrusel de Cartas (los puntos de navegación) */
 .cardCarouselIndicators {
-  position: absolute;
-  bottom: 10%;
   display: flex;
+  justify-content: center;
   gap: 0.5rem;
   z-index: 10;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 .indicator {
@@ -277,43 +318,183 @@
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.indicator:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
 }
 
 .indicator.activeIndicator {
   background-color: yellow;
+  transform: scale(1.2);
 }
 
-/* Contenido desplazable (scrollable) debajo del pedestal */
+/* Estilos específicos para los botones de navegación del carrusel de cartas */
+.carouselNavButton {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  border-radius: 50%; /* Los hace redondos */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+  width: 40px; /* Ancho fijo para la redondez */
+  height: 40px; /* Alto fijo para la redondez */
+  z-index: 10; /* Asegura que los botones estén por encima de la carta/pedestal */
+  position: absolute; /* Posición relativa a .cardCarouselWrapper */
+  top: 50%; /* Centrado verticalmente relativo al envoltorio */
+  transform: translateY(-50%); /* Ajuste para un centrado vertical perfecto */
+}
+
+.carouselNavButton:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-50%) scale(1.05); /* Ajustado para escalado */
+}
+
+.carouselNavButton:active {
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.prevButton {
+  left: 50px; /* Ajusta la distancia desde el borde izquierdo de .cardCarouselWrapper */
+}
+
+.nextButton {
+  right: 50px; /* Ajusta la distancia desde el borde derecho de .cardCarouselWrapper */
+}
+
+/* Estilos para los iconos SVG de flecha dentro de los botones de navegación del carrusel */
+.navArrowIcon {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+/* Clase para ocultar los indicadores del carrusel */
+.hideCarouselIndicators {
+  display: none !important;
+}
+
+/* Clase para personalizar la posición de los indicadores del carrusel */
+.customCarouselIndicatorsPosition {
+  position: absolute;
+  bottom: 50px;
+  left: 20px;
+  transform: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+
+/* Contenedor principal del contenido desplazable */
 .scrollableContent {
-  width: 100%;
+  width: 90%; /* Aumentado: Ocupa el 90% del ancho del padre */
+  max-width: 1400px; /* **AUMENTADO SIGNIFICATIVAMENTE** para que sea más ancho */
+  margin: 3rem auto 3rem auto; /* **AJUSTADO**: Arriba 3rem, laterales auto, Abajo 3rem (igual que arriba) */
   padding: 2rem;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
-  margin-top: 0; /* Removed fixed margin-top */
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Cambiado a columna para apilar las secciones */
   align-items: center;
-  /* border: 2px solid blue; /* For debugging - blue box */
+  gap: 2rem; /* Espacio entre las nuevas secciones */
+  order: 4;
 }
 
-/* RIGHT SIDEBAR */
+/* Estilos para las nuevas secciones dentro de scrollableContent */
+.scrollSection {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  width: 100%; /* Ocupa todo el ancho del contenedor padre */
+  max-width: 1100px; /* Un poco menos que el padre para padding/margen visual */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  margin-bottom: 1rem; /* Espacio entre secciones */
+}
+
+.scrollSection h3 {
+  font-family: 'Titania Regular', sans-serif;
+  font-size: 1.8rem;
+  color: yellow;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 8px rgba(255, 255, 0, 0.7);
+}
+
+.scrollSection p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #e0e0e0;
+}
+
+/* Estilos específicos para el carrusel de tiendas */
+.storesCarousel {
+  display: flex; /* Horizontal por defecto */
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem; /* Espacio entre las tiendas */
+  overflow-x: auto; /* Permite scroll horizontal si es necesario */
+  padding: 1rem 0; /* Un poco de padding para que no se pegue a los bordes */
+  -webkit-overflow-scrolling: touch; /* Mejora el scroll en iOS */
+  scroll-snap-type: x mandatory; /* Para un scroll más suave */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.storeItem {
+  flex-shrink: 0; /* Evita que los items se encojan */
+  width: 150px; /* Ancho fijo para cada tienda */
+  height: 100px; /* Alto fijo */
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  scroll-snap-align: start; /* Alinea al inicio del scroll */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.storeItem:hover {
+  transform: translateY(-5px) scale(1.02);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+/* BARRA LATERAL DERECHA - Contendrá el carrusel y el cuadro de información en móvil */
 .sidebarRight {
   width: 250px;
-  /* Removed height: 100% */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Align content to the top */
+  justify-content: flex-start;
   align-items: center;
-  /* border: 2px solid lime; /* For debugging */
-  flex-shrink: 0; /* Asegura que no se encoja a menos que sea necesario */
+  flex-shrink: 0;
+  gap: 1rem; /* Espacio entre el carrusel y el cuadro de información */
+  order: 3; /* Orden predeterminada para escritorio */
 }
 
 /* CARRUSEL DE AMIGOS DENTRO DE LA SIDEBAR DERECHA */
 .carouselContainer {
   width: 100%;
-  height: 300px; /* Adjust height as needed for content */
+  height: 300px;
   overflow: hidden;
   border-radius: 0.5rem;
   background-color: rgba(0, 0, 0, 0.3);
@@ -339,11 +520,29 @@
   transition: opacity 0.5s ease-in-out;
 }
 
+/* Nuevo div para el cuadro de información a la derecha (móvil) */
+.infoBoxRight {
+  width: 100%;
+  height: 300px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  display: none; /* Oculto en escritorio */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.2rem;
+  padding: 1rem;
+}
+
 /* Estilos para el pie de página (footer) */
 .footer {
   background-color: rgba(0, 0, 0, 0.7);
   height: 50px;
-  margin-top: auto;
+  /* margin-top: auto; -- ELIMINADO: Ya no es necesario aquí ya que el contenedor se encarga de empujarlo hacia abajo */
+  width: 100%;
+  z-index: 1; /* Asegura que esté por encima del fondo fijo */
 }
 
 /* ========================================= */
@@ -351,49 +550,137 @@
 /* ========================================= */
 
 /* Para pantallas más pequeñas (ej. tabletas y móviles) */
-@media (max-width: 1024px) { /* Puedes ajustar este breakpoint a tu gusto */
+@media (max-width: 1024px) {
   .centerSection {
-    flex-direction: column; /* Apila los elementos verticalmente */
-    align-items: center;   /* Centra los elementos apilados */
-    gap: 1rem; /* Reduce el espacio entre elementos apilados */
-    padding: 1rem; /* Ajusta el padding general */
-  }
-
-  .sidebarLeft,
-  .sidebarRight {
-    width: 90%; /* Las barras laterales ocupan casi todo el ancho */
-    margin-top: 1rem; /* Espacio superior para separarlos del contenido previo */
-    order: 2; /* Les da un orden para que aparezcan después del contentArea */
-    height: auto; /* Permite que la altura se ajuste al contenido */
-  }
-
-  .contentArea {
-    width: 100%; /* El área de contenido principal ocupa todo el ancho */
-    padding: 0 1rem; /* Ajusta el padding para pantallas pequeñas */
-    order: 1; /* Le da el orden para que aparezca primero */
-  }
-
-  /* Ajustes específicos para los contenedores dentro de las sidebars si es necesario */
-  .infoBoxLeft,
-  .carouselContainer {
-    width: 100%; /* Asegura que su contenido se ajuste al ancho de la sidebar */
-    height: auto; /* La altura se ajusta al contenido para que no desaparezca */
-    min-height: 150px; /* Un mínimo para que siempre sea visible */
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
     padding: 1rem;
+  }
+
+  /* El contenido principal debe ser el primero */
+  .contentArea {
+    width: 100%;
+    padding: 0 1rem;
+    order: 1; /* Área de contenido primero en móvil */
+  }
+
+  /* Ocultar la barra lateral izquierda solo para escritorio */
+  .sidebarLeft.desktopOnly {
+    display: none;
+  }
+
+  /* Hacer que la barra lateral derecha ocupe todo el ancho y aparezca después de contentArea */
+  .sidebarRight {
+    width: 90%; /* Más ancho en móvil */
+    margin-top: 1rem;
+    order: 2; /* Barra lateral derecha después del área de contenido */
+    height: auto;
+  }
+
+  /* Mostrar el infoBoxRight en móvil */
+  .infoBoxRight.mobileOnly {
+    display: flex; /* Mostrar en móvil */
+    min-height: 150px; /* Asegura que tenga algo de altura */
+    margin-top: 1rem; /* Espacio entre el carrusel y el cuadro de información */
+  }
+
+  /* Contenedor del carrusel dentro de la barra lateral derecha */
+  .carouselContainer {
+    width: 100%;
+    height: auto; /* Permite que la altura se ajuste */
+    min-height: 150px;
+    padding: 1rem;
+  }
+
+  /*
+  * Ajustar carta y pedestal para responsividad
+  */
+  .cardCarouselWrapper {
+    width: 95%; /* Ocupa más ancho en pantallas más pequeñas */
+    max-width: 500px; /* Limita su ancho para evitar que se estire demasiado en tabletas */
+    height: 400px; /* Altura ajustada para responsividad */
+    margin-top: 0.5rem; /* Margen superior reducido para responsividad */
+    margin-bottom: 1.5rem; /* Margen reducido */
+  }
+
+  .pedestalContainer {
+    /* No se necesitan cambios aquí, ocupa el 100% de la altura del envoltorio */
+  }
+
+  .pedestal {
+    width: 90%; /* Ajusta el ancho del pedestal para responsividad */
+    height: 90%; /* Ajusta la altura del pedestal para que encaje */
+  }
+
+  /* Ajustar la posición de la carta para responsividad */
+  .cardFlipContainer {
+    width: 180px; /* Tamaño de carta más pequeño */
+    padding-bottom: calc(180px * 1.4); /* Mantiene la relación de aspecto */
+    top: 25%; /* Posición de la carta ajustada para responsividad */
+  }
+
+  /* Ajustar el posicionamiento de los botones para pantallas más pequeñas */
+  .carouselNavButton {
+    /* Ajustes específicos para móviles */
+    top: 50%; /* Centrado verticalmente */
+    transform: translateY(-50%);
+    width: 35px; /* Botones ligeramente más pequeños */
+    height: 35px;
+  }
+
+  .prevButton {
+    left: 5%; /* Mantiene la izquierda */
+  }
+
+  .nextButton {
+    right: 5%; /* Mantiene la derecha */
+    left: auto; /* Asegura que no se aplique el 'left' de .prevButton */
+  }
+
+  /* El contenido desplazable viene después de ambas barras laterales en móvil */
+  .scrollableContent {
+    order: 3;
+    /* Reducimos el padding lateral para que se vea más ancho */
+    padding: 1rem; /* Reduce el padding general */
+    margin-top: 1rem;
+    /* Asegura que el max-width y los márgenes automáticos también se apliquen aquí */
+    width: 95%; /* **AJUSTADO**: Ocupa el 95% del ancho disponible */
+    max-width: 95%; /* **AJUSTADO**: Asegura que no crezca más allá del 95% */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem; /* **AJUSTADO**: Margen inferior igual que el superior para móvil */
+    gap: 1rem; /* Reduce el espacio entre secciones en móvil */
+  }
+
+  /* Carrusel de tiendas se vuelve vertical en móvil */
+  .storesCarousel {
+    flex-direction: column; /* Vuelve vertical en pantallas pequeñas */
+    align-items: center; /* Centra los elementos */
+    gap: 0.8rem; /* Espacio reducido entre tiendas */
+    overflow-x: hidden; /* No hay scroll horizontal en móvil */
+    overflow-y: auto; /* Permite scroll vertical si hay muchas tiendas */
+    height: 300px; /* Altura fija para el scroll vertical */
+    scroll-snap-type: y mandatory;
+  }
+
+  .storeItem {
+    width: 90%; /* Ocupa más ancho en vertical */
+    height: 80px; /* Un poco más corto en vertical */
   }
 }
 
-/* Si quieres un breakpoint adicional para móviles muy pequeños */
+/* Dispositivos móviles muy pequeños */
 @media (max-width: 768px) {
   .header {
     padding: 0.5rem 1rem;
-    flex-direction: column; /* Apila los elementos del header (logo, nav, user) */
+    flex-direction: column;
     align-items: center;
     gap: 0.5rem;
   }
 
   .navList {
-    flex-wrap: wrap; /* Permite que los botones de navegación se envuelvan */
+    flex-wrap: wrap;
     justify-content: center;
     gap: 0.8rem;
   }
@@ -403,29 +690,53 @@
     padding: 0.3rem 0.8rem;
   }
 
-  .pedestalContainer {
-    width: 95%; /* Adapta el pedestal a la pantalla del móvil */
-    height: auto; /* Permite que la altura se ajuste proporcionalmente */
-    padding-bottom: 60%; /* Relación de aspecto para el pedestal */
-    margin-bottom: 2rem;
+  .cardCarouselWrapper {
+    height: 380px; /* Altura aún más pequeña para pantallas muy pequeñas */
+    margin-bottom: 1rem; /* Reduce aún más el espaciado */
   }
 
   .pedestal {
-    top: 10%; /* Ajusta la posición del pedestal si es necesario */
+    width: 95%; /* Ajusta el ancho del pedestal para pantallas muy pequeñas */
+    height: 95%; /* Ajusta la altura del pedestal para que encaje */
   }
 
   .cardFlipContainer {
-    width: 150px; /* Reduce el tamaño de la carta para móviles */
-    padding-bottom: calc(150px * 1.4); /* Mantiene la proporción de la carta */
-    top: 5%; /* Ajusta la posición vertical de la carta sobre el pedestal */
+    width: 140px; /* Tamaño de carta aún más pequeño */
+    padding-bottom: calc(140px * 1.4);
+    top: 28%; /* Reajusta la posición de la carta para pantallas muy pequeñas */
   }
 
   .featuredTitle {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
   }
 
   .scrollableContent {
-    padding: 1rem;
+    padding: 0.8rem; /* **AJUSTADO**: Reducido aún más el padding para pantallas muy pequeñas */
+    margin-top: 1rem;
+    width: 98%; /* **AJUSTADO**: Ocupa casi todo el ancho */
+    max-width: 98%; /* **AJUSTADO**: Asegura que no crezca más allá del 98% */
+    margin-bottom: 1rem; /* **AJUSTADO**: Margen inferior igual que el superior para móvil muy pequeño */
+  }
+
+  .carouselNavButton {
+    /* Ajustes específicos para móviles muy pequeños */
+    left: 2%;
+    right: 2%;
+    width: 30px;
+    height: 30px;
+  }
+
+  .prevButton {
+    left: 2%;
+  }
+
+  .nextButton {
+    right: 2%;
+    left: auto; /* Asegura que no se aplique el 'left' de .prevButton */
+  }
+
+  .scrollSection h3 {
+    font-size: 1.5rem;
   }
 }
