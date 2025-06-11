@@ -1,5 +1,21 @@
+<<<<<<< HEAD
 // next.config.mjs  <-- Si lo renombraste a .mjs
 // O next.config.js <-- Si sigue siendo .js pero estás en una versión de Node/Next.js que espera ESM
+=======
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      issuer: {
+        and: [/\.(js|ts|jsx|tsx)$/],
+      },
+      use: ['@svgr/webpack'],
+    });
+    return config;
+  },
+};
+>>>>>>> a5679fd (primer commit proyecto)
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
