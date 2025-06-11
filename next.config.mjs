@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-// next.config.mjs  <-- Si lo renombraste a .mjs
-// O next.config.js <-- Si sigue siendo .js pero estás en una versión de Node/Next.js que espera ESM
-=======
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Configuración de Webpack para manejar SVG
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -14,11 +11,8 @@ const nextConfig = {
     });
     return config;
   },
-};
->>>>>>> a5679fd (primer commit proyecto)
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+  // Configuración de optimización de imágenes para dominios remotos
   images: {
     remotePatterns: [
       {
@@ -61,5 +55,5 @@ const nextConfig = {
   },
 };
 
-// CAMBIO AQUÍ: Usar export default en lugar de module.exports
+// Se usa export default para compatibilidad con módulos ES (ESM)
 export default nextConfig;

@@ -1,6 +1,5 @@
 /* Home.module.css */
 
-<<<<<<< HEAD
 /*
   ==============================================================
   INICIO: Definición de la fuente local "Titania Regular"
@@ -32,15 +31,6 @@
 }
 
 /* Estilos para la imagen de fondo estática */
-=======
-.container {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
->>>>>>> a5679fd (primer commit proyecto)
 .background {
   position: fixed;
   top: 0;
@@ -52,10 +42,7 @@
   z-index: -2;
 }
 
-<<<<<<< HEAD
 /* Estilos para el degradado de fondo que cubre la imagen */
-=======
->>>>>>> a5679fd (primer commit proyecto)
 .backgroundGradient {
   position: absolute;
   top: 0;
@@ -66,26 +53,17 @@
   z-index: -1;
 }
 
-<<<<<<< HEAD
 /* Estilos para el contenido principal que se superpone al fondo */
-=======
->>>>>>> a5679fd (primer commit proyecto)
 .mainContent {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
   flex: 1; /* NUEVO: Permite que mainContent crezca y empuje el pie de página hacia abajo */
   /* min-height: 100vh; -- ELIMINADO: Esto causaba el problema, mainContent ya no necesita ser 100vh */
 }
 
 /* Estilos para el encabezado (header) */
-=======
-  min-height: 100vh;
-}
-
->>>>>>> a5679fd (primer commit proyecto)
 .header {
   display: flex;
   justify-content: space-between;
@@ -102,10 +80,7 @@
   z-index: 100;
 }
 
-<<<<<<< HEAD
 /* Estilos para la lista de navegación */
-=======
->>>>>>> a5679fd (primer commit proyecto)
 .navList {
   display: flex;
   list-style: none;
@@ -114,12 +89,8 @@
   padding: 0;
 }
 
-<<<<<<< HEAD
 /* Estilos para los botones de navegación (HEADER - NORMAL STYLE) */
 .navButton { /* Esto ahora solo apunta a los botones de navegación del encabezado */
-=======
-.navButton {
->>>>>>> a5679fd (primer commit proyecto)
   background: none;
   border: none;
   color: white;
@@ -127,46 +98,23 @@
   cursor: pointer;
   padding: 0.5rem 1rem;
   transition: color 0.3s ease;
-<<<<<<< HEAD
   font-family: 'Titania Regular', sans-serif;
   font-weight: normal;
-=======
->>>>>>> a5679fd (primer commit proyecto)
 }
 
 .navButton:hover {
   color: #a0a0a0;
 }
 
-<<<<<<< HEAD
 /* Estilos para la información del usuario */
-=======
-/* User Info Styles */
->>>>>>> a5679fd (primer commit proyecto)
 .userInfo {
   display: flex;
   align-items: center;
   gap: 1rem;
-<<<<<<< HEAD
   background-color: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 5px;
   padding: 0.5rem 1rem;
-=======
-}
-
-.userAvatar {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 9999px;
-  border: 1px solid #9ca3af;
-  background-color: #374151;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #9ca3af;
-  font-size: 0.875rem;
->>>>>>> a5679fd (primer commit proyecto)
 }
 
 .userDetails {
@@ -196,7 +144,6 @@
   color: #d1d5db;
 }
 
-<<<<<<< HEAD
 /* Nuevo: Contenedor para la sección central (barras laterales + área de contenido principal) */
 .centerSection {
   display: flex;
@@ -241,65 +188,11 @@
 
 
 /* Estilos para el área de contenido central (main) */
-=======
-/* Flex container for sidebars and main content */
-.flex-1 {
-  flex: 1;
-  display: flex;
-  overflow: hidden;
-}
-
-/* Sidebar Left Styles */
-.sidebarLeft {
-  width: 150px;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.sidebarButtonsWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  align-items: center;
-}
-
-.sidebarButton {
-  width: 80%;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  text-align: center;
-}
-
-/* Glass Effect for Sidebar Buttons */
-.glassEffect {
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.glassEffect:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-/* Content Area Styles */
->>>>>>> a5679fd (primer commit proyecto)
 .contentArea {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-<<<<<<< HEAD
   padding: 0 2rem;
   overflow-y: visible;
   position: relative;
@@ -417,57 +310,6 @@
   z-index: 10;
   margin-top: 2rem;
   margin-bottom: 1rem;
-=======
-  padding: 2rem;
-  overflow-y: auto;
-  padding-top: 0;
-}
-
-/* Pedestal y Carta */
-.pedestalContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 70vh;
-  position: relative;
-  margin-bottom: 2rem;
-  flex-shrink: 0;
-}
-
-.pedestal {
-  width: 70%;
-  height: 50%;
-  background-image: url('/elemetos/pedestal.svg'); /* <--- RUTA ACTUALIZADA AQUÍ */
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.tcgCard {
-  width: 30%; /* Mantén o ajusta este valor si necesitas que la carta sea más grande/pequeña */
-  max-height: 70%;
-  object-fit: contain;
-  position: absolute;
-  top: -45%; /* <--- AUMENTA ESTE VALOR NEGATIVO para subir la carta más (ej. de -15% a -25% o -30%) */
-  transform: translateY(-50px); /* Esto ya le da un pequeño "flote" */
-  transition: transform 0.5s ease-out, opacity 0.5s ease-in-out;
-}
-
-/* Indicadores del Carrusel de Cartas */
-.cardCarouselIndicators {
-  position: absolute;
-  bottom: 5%;
-  display: flex;
-  gap: 0.5rem;
-  z-index: 10;
->>>>>>> a5679fd (primer commit proyecto)
 }
 
 .indicator {
@@ -476,21 +318,16 @@
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
-<<<<<<< HEAD
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .indicator:hover {
   background-color: rgba(255, 255, 255, 0.8);
   transform: scale(1.2);
-=======
-  transition: background-color 0.3s ease;
->>>>>>> a5679fd (primer commit proyecto)
 }
 
 .indicator.activeIndicator {
   background-color: yellow;
-<<<<<<< HEAD
   transform: scale(1.2);
 }
 
@@ -565,18 +402,10 @@
   width: 90%; /* Aumentado: Ocupa el 90% del ancho del padre */
   max-width: 1400px; /* **AUMENTADO SIGNIFICATIVAMENTE** para que sea más ancho */
   margin: 3rem auto 3rem auto; /* **AJUSTADO**: Arriba 3rem, laterales auto, Abajo 3rem (igual que arriba) */
-=======
-}
-
-/* Contenido Scrollable */
-.scrollableContent {
-  width: 100%;
->>>>>>> a5679fd (primer commit proyecto)
   padding: 2rem;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
-<<<<<<< HEAD
   display: flex;
   flex-direction: column; /* Cambiado a columna para apilar las secciones */
   align-items: center;
@@ -666,32 +495,10 @@
 .carouselContainer {
   width: 100%;
   height: 300px;
-=======
-  margin-top: -2rem;
-}
-
-/* Sidebar Right Styles */
-.sidebarRight {
-  width: 250px;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-
-/* Carousel Container Styles */
-.carouselContainer {
-  position: sticky;
-  top: calc(50vh + 50px);
-  width: 100%;
-  height: 200px;
->>>>>>> a5679fd (primer commit proyecto)
   overflow: hidden;
   border-radius: 0.5rem;
   background-color: rgba(0, 0, 0, 0.3);
   display: flex;
-<<<<<<< HEAD
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -787,8 +594,8 @@
   }
 
   /*
-  * Ajustar carta y pedestal para responsividad
-  */
+   * Ajustar carta y pedestal para responsividad
+   */
   .cardCarouselWrapper {
     width: 95%; /* Ocupa más ancho en pantallas más pequeñas */
     max-width: 500px; /* Limita su ancho para evitar que se estire demasiado en tabletas */
@@ -858,6 +665,7 @@
   }
 
   .storeItem {
+    flex-shrink: 0; /* Evita que los items se encojan */
     width: 90%; /* Ocupa más ancho en vertical */
     height: 80px; /* Un poco más corto en vertical */
   }
@@ -932,23 +740,4 @@
   .scrollSection h3 {
     font-size: 1.5rem;
   }
-=======
-  justify-content: center;
-  align-items: center;
-  margin-top: auto;
-}
-
-.carouselImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.5s ease-in-out;
-}
-
-/* Footer Styles */
-.footer {
-  background-color: rgba(0, 0, 0, 0.7);
-  height: 50px;
-  margin-top: auto;
->>>>>>> a5679fd (primer commit proyecto)
 }
