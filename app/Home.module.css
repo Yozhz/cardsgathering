@@ -604,10 +604,7 @@
     margin-bottom: 1.5rem; /* Margen reducido */
   }
 
-  .pedestalContainer {
-    /* No se necesitan cambios aquí, ocupa el 100% de la altura del envoltorio */
-  }
-
+  
   .pedestal {
     width: 90%; /* Ajusta el ancho del pedestal para responsividad */
     height: 90%; /* Ajusta la altura del pedestal para que encaje */
