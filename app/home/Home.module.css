@@ -1,24 +1,14 @@
 /* Home.module.css */
 
 /*
-  ==============================================================
-  INICIO: Definición de la fuente local "Titania Regular"
-  ==============================================================
-  Asegúrate de que tus archivos de fuente (ej. Titania-Regular.woff2)
-  estén en la ruta `public/fonts/` de tu proyecto.
-*/
-@font-face {
-  font-family: 'Titania Regular'; /* Nombre que usarás para aplicar la fuente */
-  src: url('/fonts/Titania-Regular.woff2') format('woff2'),
-       url('/fonts/Titania-Regular.woff') format('woff'); /* Incluye otros formatos si los tienes */
-  font-weight: normal; /* Ajusta esto si tu fuente tiene un peso específico (ej. 400) */
-  font-style: normal;
-  font-display: swap; /* Estrategia de carga para una mejor UX */
-}
-/*
-  ==============================================================
-  FIN: Definición de la fuente local "Titania Regular"
-  ==============================================================
+ ==============================================================
+ ¡ATENCIÓN!
+ La definición de la fuente "Titania Regular" y todos los estilos
+ relacionados con el '.header' (incluyendo .navList, .navButton,
+ .userInfo, .userDetails, etc.)
+ y sus media queries,
+ HAN SIDO MOVIDOS a `styles/globals.css`.
+ ==============================================================
 */
 
 
@@ -49,7 +39,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.9) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.9) 100%);
   z-index: -1;
 }
 
@@ -63,86 +53,6 @@
   /* min-height: 100vh; -- ELIMINADO: Esto causaba el problema, mainContent ya no necesita ser 100vh */
 }
 
-/* Estilos para el encabezado (header) */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  color: white;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-/* Estilos para la lista de navegación */
-.navList {
-  display: flex;
-  list-style: none;
-  gap: 1.5rem;
-  margin: 0;
-  padding: 0;
-}
-
-/* Estilos para los botones de navegación (HEADER - NORMAL STYLE) */
-.navButton { /* Esto ahora solo apunta a los botones de navegación del encabezado */
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  transition: color 0.3s ease;
-  font-family: 'Titania Regular', sans-serif;
-  font-weight: normal;
-}
-
-.navButton:hover {
-  color: #a0a0a0;
-}
-
-/* Estilos para la información del usuario */
-.userInfo {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-}
-
-.userDetails {
-  display: flex;
-  flex-direction: column;
-}
-
-.userNameContainer {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.yozhzIcon {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.userName {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: white;
-}
-
-.userLevel {
-  font-size: 0.875rem;
-  color: #d1d5db;
-}
 
 /* Nuevo: Contenedor para la sección central (barras laterales + área de contenido principal) */
 .centerSection {
@@ -207,42 +117,47 @@
   margin-top: 0;
   margin-bottom: 0.5rem;
   text-shadow: 0 0 10px rgba(0,0,0,0.7);
-  font-family: 'Titania Regular', sans-serif;
+  font-family: 'Titania Regular', sans-serif; /* Todavía lo usarás aquí, asegúrate de que la fuente esté en global.css */
   font-weight: normal;
 }
 
 /* Envoltorio para la carta, el pedestal y los botones laterales */
 .cardCarouselWrapper {
-  position: relative;
+  position: relative; /* Importante para posicionar los botones de navegación */
   display: flex;
   flex-direction: column; /* Apila el pedestal y la carta */
   align-items: center;
-  width: 600px; /* Ancho máximo para escritorio */
-  height: 480px; /* Proporciona espacio para la carta y el pedestal */
+  width: 600px;
+  height: 480px;
   margin-top: 1rem;
-  margin-bottom: 2rem; /* Ajustado para el espaciado general */
+  margin-bottom: 2rem;
+  /* La perspectiva para el efecto 3D global debería estar en un ancestro común
+     de .cardFlipContainer, o en el mismo .cardFlipContainer.
+     Lo vamos a dejar en .pedestalContainer por ahora si así lo tienes,
+     pero el que directamente afecta la rotación 3D de la carta es .cardFlipContainer y .flipper.
+  */
 }
 
 /* Contenedor para el pedestal */
 .pedestalContainer {
   width: 100%;
-  height: 100%; /* Permite que el pedestal ocupe toda la altura para el posicionamiento */
+  height: 100%;
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: flex-end; /* Alinea la imagen del pedestal a la parte inferior */
-  perspective: 1000px; /* Para el efecto 3D de la carta */
+  align-items: flex-end;
+  perspective: 1000px; /* <--- Mantenemos la perspectiva aquí para toda la escena */
 }
 
 /* Estilos para el pedestal (imagen SVG) */
 .pedestal {
   width: 100%;
-  height: 100%; /* Ocupa todo el espacio de pedestalContainer */
+  height: 100%;
   background-image: url('/elementos/pedestal01.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center bottom; /* Asegura que el pedestal esté en la parte inferior */
-  position: absolute; /* Posición dentro de pedestalContainer */
+  background-position: center bottom;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
@@ -250,58 +165,70 @@
 }
 
 /* Contenedor principal para la carta que va a rotar */
+/* ESTE ES EL CONTENEDOR QUE SE MUEVE CON EL HOVER Y EL RATÓN */
 .cardFlipContainer {
-  width: 240px;
-  padding-bottom: calc(240px * 1.4); /* Mantiene la relación de aspecto */
-  position: absolute;
-  /* === AQUÍ ES DONDE CONTROLAS LA ALTURA DE LA CARTA === */
-  top: 8%; /* Ajusta este valor para posicionar la carta sobre el pedestal */
-  /* === =========================================== === */
-  left: 50%;
-  transform: translateX(-50%); /* Centra horizontalmente */
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease;
-  cursor: pointer;
-  z-index: 5; /* Encima del pedestal */
+ width: 240px;
+ padding-bottom: calc(240px * 1.4);
+ position: absolute;
+ top: 8%;
+ left: 50%;
+ transform: translateX(-50%);
+ transform-style: preserve-3d;
+ transition: transform 0.3s ease-out; /* <-- ELIMINAMOS 'box-shadow' de aquí, ya no transicionará */
+ cursor: pointer;
+ z-index: 5;
+ /* APLICAMOS LA SOMBRA PERMANENTE AQUÍ */
+ box-shadow: 0 40px 25px -10px rgba(0, 0, 0, 0.3); /* Sombra roja, solo hacia abajo, siempre activa */
 }
 
-.cardFlipContainer:hover {
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.377), 0 0 25px rgba(255, 255, 255, 0) inset;
+
+/* El FLIPPER: ESTE ES EL ELEMENTO QUE HACE LA ROTACIÓN DE VOLTEO */
+.flipper {
+  position: absolute; /* Permite que ocupe todo el espacio de su padre (.cardFlipContainer) */
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s; /* Transición para el volteo suave */
+  transform-style: preserve-3d; /* ESENCIAL: Asegura el efecto 3D para sus caras */
 }
+
+/* Clase para cuando el flipper está volteado */
+.flipper.flipped {
+  transform: rotateY(180deg); /* La rotación para mostrar el reverso */
+}
+
 
 /* Estilos comunes para ambas caras de la carta (anverso y reverso) */
 .cardFront,
 .cardBack {
-  position: absolute;
+  position: absolute; /* Posicionamiento dentro del .flipper */
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; /* ESENCIAL: Oculta la cara cuando está al revés */
+  backface-visibility: hidden;         /* ESENCIAL: Oculta la cara cuando está al revés */
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0);
+  /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0);  // Puedes quitar esto si no quieres sombra en las caras individuales */
 }
 
 /* Estilos para la cara delantera de la carta */
 .cardFront {
-  transform: rotateY(0deg);
-  z-index: 2;
+  transform: rotateY(0deg); /* Asegura que empieza viendo al frente */
+  z-index: 2; /* Para que esté encima de cardBack inicialmente */
 }
 
 /* Estilos para la cara trasera de la carta */
 .cardBack {
-  transform: rotateY(180deg);
-  z-index: 1;
+  transform: rotateY(180deg); /* Inicialmente rotada para que solo se vea al voltear el flipper */
+  z-index: 1; /* Para que esté detrás de cardFront inicialmente */
 }
 
 /* Estilos para las imágenes dentro de las caras (anverso/reverso) */
 .tcgCardImage {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: contain; /* o 'cover' dependiendo de cómo quieras que se ajusten las imágenes */
   display: block;
 }
-
 /* Indicadores del Carrusel de Cartas (los puntos de navegación) */
 .cardCarouselIndicators {
   display: flex;
@@ -327,7 +254,7 @@
 }
 
 .indicator.activeIndicator {
-  background-color: yellow;
+  background-color: rgb(211, 241, 38);
   transform: scale(1.2);
 }
 
@@ -427,11 +354,11 @@
 }
 
 .scrollSection h3 {
-  font-family: 'Titania Regular', sans-serif;
+  font-family: 'Titania Regular', sans-serif; /* Todavía lo usarás aquí */
   font-size: 1.8rem;
-  color: yellow;
+  color: rgb(255, 255, 255);
   margin-bottom: 1rem;
-  text-shadow: 0 0 8px rgba(255, 255, 0, 0.7);
+  text-shadow: 0 0 8px rgba(255, 115, 0, 0.952);
 }
 
 .scrollSection p {
@@ -546,7 +473,7 @@
 }
 
 /* ========================================= */
-/* Media Queries para Responsividad          */
+/* Media Queries para Responsividad         */
 /* ========================================= */
 
 /* Para pantallas más pequeñas (ej. tabletas y móviles) */
@@ -604,7 +531,6 @@
     margin-bottom: 1.5rem; /* Margen reducido */
   }
 
-  
   .pedestal {
     width: 90%; /* Ajusta el ancho del pedestal para responsividad */
     height: 90%; /* Ajusta la altura del pedestal para que encaje */
@@ -670,23 +596,12 @@
 
 /* Dispositivos móviles muy pequeños */
 @media (max-width: 768px) {
-  .header {
-    padding: 0.5rem 1rem;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .navList {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.8rem;
-  }
-
-  .navButton {
-    font-size: 0.9rem;
-    padding: 0.3rem 0.8rem;
-  }
+  /*
+   * ¡ATENCIÓN!
+   * Todas las media queries que afectaban al `.header`,
+   * `.navList`, y `.navButton`
+   * HAN SIDO MOVIDAS a `styles/globals.css`.
+   */
 
   .cardCarouselWrapper {
     height: 380px; /* Altura aún más pequeña para pantallas muy pequeñas */
