@@ -1,0 +1,180 @@
+/* app/components/PlaceBidModal.module.css */
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Más oscuro para segundo modal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001; /* Mayor z-index que el modal anterior */
+}
+
+.modalContent {
+    background-color: #1C223A; /* Color oscuro de la paleta */
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    padding: 2.5rem;
+    position: relative;
+    width: 90%;
+    max-width: 500px; /* Más pequeño que el modal de detalles */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    backdrop-filter: blur(8px); /* MorphinGlass */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+}
+
+.bidHeader {
+    margin-bottom: 2rem;
+}
+
+.headerIcon {
+    /* Estilos para el icono del encabezado, como se ve en la imagen */
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.bidInputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.bidField {
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo claro con transparencia */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea etiquetas a la izquierda */
+    gap: 0.5rem;
+}
+
+.bidLabel {
+    font-size: 1.1rem;
+    color: #cccccc;
+    font-weight: bold;
+}
+
+.bidValue {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #00FF00; /* Verde para el monto */
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.4);
+    width: 100%;
+    text-align: left; /* Alinea el valor a la izquierda */
+}
+
+.bidInput {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    border: 1px solid #E95025; /* Borde con color de acento */
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 1.8rem; /* Tamaño de fuente grande para la entrada */
+    text-align: left; /* Alinea el texto de entrada a la izquierda */
+    box-sizing: border-box; /* Incluye padding en el ancho */
+    
+}
+
+/* Ocultar flechas en input type="number" */
+.bidInput::-webkit-outer-spin-button,
+.bidInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.bidInput:focus {
+    outline: none;
+    border-color: white;
+    box-shadow: 0 0 0 3px rgba(233, 80, 37, 0.4);
+}
+
+.errorMessage {
+    color: #ff4d4d; /* Rojo para errores */
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+.actionButtons {
+    display: flex;
+    flex-direction: column; /* Apilados en móvil, pueden ser fila en desktop */
+    gap: 1rem;
+    width: 100%;
+}
+
+.placeBidButton,
+.cancelButton {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    width: 100%; /* Ocupa el ancho completo */
+}
+
+.placeBidButton {
+    background-color: #007bff; /* Azul para "Pujar" */
+    color: white;
+}
+
+.placeBidButton:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.cancelButton {
+    background-color: #dc3545; /* Rojo para "Cancelar" */
+    color: white;
+}
+
+.cancelButton:hover {
+    background-color: #c82333;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .modalContent {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .bidField {
+        padding: 1rem;
+    }
+
+    .bidValue {
+        font-size: 1.8rem;
+    }
+
+    .bidInput {
+        font-size: 1.5rem;
+        padding: 0.6rem;
+    }
+
+    .placeBidButton,
+    .cancelButton {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.5rem;
+    }
+}

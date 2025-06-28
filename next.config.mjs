@@ -51,6 +51,13 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      // ¡Esta es la entrada que necesitas añadir para el servidor de QR!
+      {
+        protocol: 'https',
+        hostname: 'api.qrserver.com',
+        port: '',
+        pathname: '/**', // Permite cualquier ruta de la API de QR Server
+      },
     ],
   },
 };

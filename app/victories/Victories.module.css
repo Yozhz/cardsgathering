@@ -1,0 +1,323 @@
+/* app/victories/Victories.module.css */
+
+.victoriesPageContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #121212; /* Color de fondo oscuro general */
+    position: relative;
+    overflow-x: hidden; /* Evita el scroll horizontal */
+}
+
+.victoriesBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.4); /* Oscurece la imagen de fondo */
+    z-index: 0;
+}
+
+.victoriesBackgroundGradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9));
+}
+
+.victoriesMainContent {
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+    padding-top: 100px; /* Espacio para el header fijo */
+    max-width: 1200px; /* Ancho máximo para el contenido principal */
+    margin: 0 auto; /* Centra el contenido */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.victoriesTopRow {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.backButton {
+    background-color: #1B1C1D; /* Gris oscuro */
+    color: white;
+    border: none;
+    border-radius: 0.8rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.backButton:hover {
+    background-color: #333;
+}
+
+.victoriesTitle {
+    font-family: 'Titania Regular', sans-serif;
+    font-size: 3.5rem;
+    color: white;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    margin: 0;
+}
+
+.victoriesGridContainer {
+    display: flex;
+    flex-direction: column; /* Asegura que la lista sea de columna */
+    gap: 1.5rem;
+}
+
+.victoriesContentArea {
+    flex-grow: 1;
+}
+
+.victoriesList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Espacio entre las tarjetas de victoria */
+}
+
+.victoryCard {
+    background-color: rgba(28, 34, 58, 0.9); /* #1C223A con transparencia */
+    border: 1px solid #E95025; /* Borde de color de acento */
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+}
+
+.victoryCardImageContainer {
+    width: 100px;
+    height: 140px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0; /* No se encoge */
+}
+
+.victoryCardImage {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0.3rem;
+}
+
+.victoryCardInfo {
+    flex-grow: 1; /* Ocupa el espacio restante */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 250px; /* Asegura que la información no se compacte demasiado */
+}
+
+.victoryCardName {
+    font-family: 'Titania Regular', sans-serif;
+    font-size: 1.8rem;
+    color: #E95025;
+    margin: 0;
+}
+
+.victoryCardDetail {
+    font-size: 1rem;
+    color: #ccc;
+    margin: 0;
+}
+
+.detailLabel {
+    font-weight: bold;
+    color: #fff;
+    margin-right: 0.3rem;
+}
+
+.victoryCardAmount {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #00FF00; /* Verde brillante */
+    margin-top: 0.8rem;
+}
+
+.victoryCardActions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap; /* Permite que los botones se envuelvan */
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+    align-items: center;
+}
+
+.payButton {
+    background-color: #4CAF50; /* Verde vibrante */
+    color: white;
+    border: none;
+    border-radius: 0.6rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.payButton:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.paidButton {
+    background-color: #555; /* Gris para "Pagado" */
+    color: #bbb;
+    border: none;
+    border-radius: 0.6rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+.downloadInvoiceButton {
+    background-color: #E95025; /* Color de acento */
+    color: white;
+    border: none;
+    border-radius: 0.6rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.downloadInvoiceButton:hover {
+    background-color: #c9431f;
+    transform: translateY(-2px);
+}
+
+.noVictoriesMessage {
+    font-size: 1.5rem;
+    color: #ccc;
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.errorMessage {
+    font-size: 1.5rem;
+    color: #ff6347; /* Rojo para errores */
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.retryButton {
+    background-color: #E95025;
+    color: white;
+    border: none;
+    border-radius: 0.8rem;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.retryButton:hover {
+    background-color: #c9431f;
+}
+
+.victoriesFooter {
+    /* Puedes añadir estilos de footer si es necesario, o dejarlo vacío si el footer de la app lo cubre */
+    padding: 2rem;
+    text-align: center;
+    color: #aaa;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .victoriesMainContent {
+        padding: 1rem;
+        padding-top: 80px; /* Ajuste para móviles */
+    }
+
+    .victoriesTopRow {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .victoriesTitle {
+        font-size: 2.5rem;
+    }
+
+    .backButton {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    .victoryCard {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .victoryCardImageContainer {
+        width: 80px; /* Más pequeño en móviles */
+        height: 112px; /* Proporcionalmente más pequeño */
+    }
+
+    .victoryCardInfo {
+        min-width: unset; /* Eliminar el min-width */
+        width: 100%; /* Ocupa todo el ancho disponible */
+    }
+
+    .victoryCardName {
+        font-size: 1.5rem;
+    }
+
+    .victoryCardDetail,
+    .victoryCardAmount {
+        font-size: 0.9rem;
+    }
+
+    .victoryCardActions {
+        width: 100%; /* Que los botones ocupen todo el ancho */
+        justify-content: space-around; /* Distribuye los botones */
+        gap: 0.8rem; /* Espacio entre botones */
+    }
+
+    .payButton,
+    .paidButton,
+    .downloadInvoiceButton {
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+        flex-grow: 1; /* Permite que los botones crezcan */
+    }
+}
+
+@media (max-width: 480px) {
+    .victoriesTitle {
+        font-size: 2rem;
+    }
+    .payButton,
+    .paidButton,
+    .downloadInvoiceButton {
+        font-size: 0.8rem;
+        padding: 0.6rem 0.8rem;
+    }
+}

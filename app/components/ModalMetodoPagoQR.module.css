@@ -1,0 +1,113 @@
+/* app/components/ModalMetodoPagoQR.module.css */
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001; /* Mayor que el modal de detalle */
+    padding: 10px;
+}
+
+.modalContent {
+    background-color: rgba(28, 34, 58, 0.95); /* Fondo oscuro con más opacidad */
+    border-radius: 1.2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    position: relative;
+    max-width: 450px; /* Tamaño moderado para un modal de QR */
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.closeButton {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: white;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 10;
+    transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+    color: #E95025;
+}
+
+.modalTitle {
+    font-family: 'Titania Regular', sans-serif;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.qrInstructions {
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #ccc;
+}
+
+.paymentAmount {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #00FF00;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+    margin-bottom: 1.5rem;
+}
+
+.qrCodeContainer {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qrCodeImage {
+    display: block; /* Elimina espacio extra debajo de la imagen */
+}
+
+.paymentDisclaimer {
+    font-size: 0.9rem;
+    text-align: center;
+    color: #aaa;
+    margin-bottom: 1.5rem;
+}
+
+.confirmButton {
+    background-color: #E95025;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.confirmButton:hover {
+    background-color: #c9431f;
+    transform: translateY(-2px);
+}

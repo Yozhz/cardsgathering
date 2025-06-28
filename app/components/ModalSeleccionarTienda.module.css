@@ -1,0 +1,138 @@
+/* app/components/ModalSeleccionarTienda.module.css */
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    padding: 10px;
+}
+
+.modalContent {
+    background-color: rgba(28, 34, 58, 0.95);
+    border-radius: 1.2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    position: relative;
+    max-width: 600px; /* Un poco más ancho para la lista de tiendas */
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.closeButton {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: white;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 10;
+    transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+    color: #E95025;
+}
+
+.modalTitle {
+    font-family: 'Titania Regular', sans-serif;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.storeList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 400px; /* Altura máxima para el scroll */
+    overflow-y: auto; /* Habilitar scroll si hay muchas tiendas */
+    padding-right: 0.5rem; /* Espacio para el scrollbar */
+    margin-bottom: 1.5rem;
+}
+
+.storeList::-webkit-scrollbar {
+    width: 8px;
+}
+
+.storeList::-webkit-scrollbar-thumb {
+    background-color: #E95025;
+    border-radius: 4px;
+}
+
+.storeList::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.storeItem {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2px solid transparent;
+    border-radius: 0.8rem;
+    padding: 1rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.storeItem.selected {
+    border-color: #00FF00; /* Verde brillante para la tienda seleccionada */
+    background-color: rgba(0, 255, 0, 0.1);
+}
+
+.storeItem:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.storeName {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.4rem;
+}
+
+.storeAddress, .storeSchedule {
+    font-size: 0.95rem;
+    color: #ccc;
+    margin-bottom: 0.2rem;
+}
+
+.confirmButton {
+    background-color: #E95025;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    align-self: center; /* Centra el botón */
+}
+
+.confirmButton:hover:not(:disabled) {
+    background-color: #c9431f;
+    transform: translateY(-2px);
+}
+
+.confirmButton:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+    opacity: 0.7;
+}

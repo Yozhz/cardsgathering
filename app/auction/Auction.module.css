@@ -1,7 +1,6 @@
 /* app/auction/Auction.module.css */
 
 /* Estilos para el contenedor principal de la página de subastas */
-/* Estilos para el contenedor principal de la página de subastas */
 .auctionPageContainer {
     position: relative;
     min-height: 100vh;
@@ -10,22 +9,18 @@
     width: 100%;
     overflow: hidden;
     background-color: #1a1a1a;
-    /* Eliminar cualquier background-image aquí si está presente */
 }
 
 /* Fondo de la página de subastas */
 .auctionBackground {
-    position: fixed; /* Mantenlo fijo para que se quede en su lugar al hacer scroll */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-size: cover;
     background-position: center;
-    /*z-index: -2;  Podemos probar quitando el z-index negativo si el contenido principal ya está por encima */
-    /* Para ver si la imagen carga, puedes comentar o reducir estos filtros temporalmente: */
-    /* filter: brightness(0.4) blur(3px); */
-    filter: brightness(0.6) blur(2px); /* Un poco menos agresivo para la prueba */
+    filter: brightness(0.6) blur(2px);
 }
 
 /* Gradiente sobre el fondo */
@@ -35,16 +30,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* Para ver si la imagen carga, puedes comentar o reducir este gradiente temporalmente: */
-    /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.9) 100%); */
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%); /* Un poco menos agresivo para la prueba */
-    /* z-index: -1; */ /* Podemos probar quitando el z-index negativo */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%);
 }
 
-/* Contenido principal que envuelve a secciones como título, grilla, etc. */
+/* Contenido principal que envuelve a secciones como título, filtros, grilla, etc. */
 .auctionMainContent {
-    position: relative; /* Mantén esto para que el contenido esté por encima del fondo */
-    z-index: 1; /* Asegura que el contenido principal esté por encima del fondo y el gradiente */
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -54,397 +46,535 @@
     box-sizing: border-box;
 }
 
-/* NUEVA CLASE: ESTILOS PARA PANTALLAS DE CARGA Y ERROR */
+/* ESTILOS PARA PANTALLAS DE CARGA Y ERROR */
 .loadingOrErrorContent {
-  flex-grow: 1; /* Ocupa todo el espacio vertical restante en auctionPageContainer o auctionMainContent */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centra el texto verticalmente */
-  align-items: center; /* Centra el texto horizontalmente */
-  width: 100%; /* Ocupa todo el ancho */
-  text-align: center; /* Asegura que el texto dentro del párrafo también se centre */
-  /* El padding-bottom puede no ser necesario si el footer es parte del mainContent y tiene sus propios márgenes */
-  padding-bottom: 50px; /* Puedes ajustar o eliminar según la altura de tu footer */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 50px;
 }
 
+/* Contenedor para el título y los botones */
+.auctionTopRow {
+    width: 90%;
+    max-width: 1400px;
+    margin: 3rem auto 1.5rem auto;
+    display: flex;
+    /* Siempre justificado a la izquierda con botones a la derecha */
+    justify-content: space-between; 
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 2rem; /* Espacio entre el título y el grupo de botones */
+    transition: none; /* Eliminar transición */
+}
 
-/* Título de las subastas (ahora fuera del contenedor principal) */
+/* Título de las subastas */
 .auctionTitle {
-  color: white;
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-top: 2rem; /* Margen superior para separarlo del header */
-  margin-bottom: 1.5rem;
-  text-shadow: 0 0 10px rgba(0,0,0,0.7);
-  font-family: 'Titania Regular', sans-serif;
-  font-weight: normal;
-  text-align: center; /* Centrar el título */
+    /* *** CAMBIO AQUI para un estilo más elegante y minimalista *** */
+    color: #e0e0e0; /* Blanco roto para un toque suave */
+    font-size: 5rem; /* Tamaño de fuente para PC */
+    font-weight: bold;
+    /* text-shadow: 0 0 15px rgba(255, 255, 0, 0.7), 0 0 5px rgba(255, 255, 0, 0.5); /* REMOVIDO */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra sutil para profundidad */
+    letter-spacing: 0.1em; /* Espaciado entre letras para elegancia */
+    font-family: 'Titania Regular', sans-serif;
+    font-weight: normal;
+    text-align: left;
+    flex-shrink: 1;
+    flex-grow: 1;
+    min-width: 0;
+    cursor: default;
+    transition: none;
 }
 
-/* NUEVO: Contenedor principal para la grilla y la barra lateral (el "cuadro") */
-.auctionGridContainer {
-  width: 90%; /* Ajusta el ancho según necesites */
-  max-width: 1400px; /* Ancho máximo para pantallas grandes */
-  margin: 0 auto; /* Centrar horizontalmente */
-  background-color: rgba(0, 0, 0, 0.4); /* Fondo para el cuadro */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde para el cuadro */
-  border-radius: 0.75rem; /* Bordes redondeados para el cuadro */
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5); /* Sombra para el cuadro */
-  padding: 1.5rem; /* Padding interno para el cuadro */
-  box-sizing: border-box; /* Incluir padding en el ancho/alto */
+.auctionTitle:hover {
+    color: #ffffff; /* Un blanco más puro al pasar el ratón */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Sombra ligeramente más pronunciada al hover */
 }
 
-
-/* Sección central con sidebar y área de contenido (ahora dentro de auctionGridContainer) */
-.auctionCenterSection {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 2rem;
-  width: 100%; /* Ocupa el 100% del padre (auctionGridContainer) */
-  box-sizing: border-box;
+/* Contenedor para agrupar los botones (siempre visibles) */
+.auctionButtonsGroup {
+    display: flex;
+    gap: 1.5rem;
+    z-index: 2;
+    position: relative; 
+    flex-shrink: 0;
+    align-self: center;
+    margin-top: 0;
+    
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: all;
+    overflow: visible;
+    max-width: 500px;
+    transition: none;
+    flex-direction: row;
 }
 
-/* Barra lateral izquierda de Filtros */
-.auctionSidebarLeft {
-  width: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  flex-shrink: 0;
-  padding: 1.5rem;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  gap: 1.5rem;
-  order: 1;
+/* Estilos de los botones individuales */
+.createAuctionTopButton,
+.victoriesTopButton {
+    background-color: #28a745;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.createAuctionTopButton:hover,
+.victoriesTopButton:hover {
+    transform: none;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.createAuctionTopButton:hover {
+    background-color: #218838;
+}
+
+.victoriesTopButton {
+    background-color: #fd7e14;
+}
+
+.victoriesTopButton:hover {
+    background-color: #e66900;
+}
+
+/* Barra de filtros horizontal */
+.auctionFiltersBar {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto 2rem auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.75rem;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+    padding: 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-end;
+    gap: 1rem;
 }
 
 .filterSection {
-  width: 100%;
-  color: white;
-  text-align: left;
+    flex: 1;
+    min-width: 200px;
+    color: white;
+    text-align: left;
+}
+
+.filterSelect option {
+    background-color: #000000 !important;
+    color: white !important;
+    padding: 0.5rem;
+    border: none !important;
+    text-shadow: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    z-index: 11;
 }
 
 .filterSection h3 {
-  font-family: 'Titania Regular', sans-serif;
-  font-size: 1.4rem;
-  margin-bottom: 0.8rem;
-  color: yellow;
-  text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+    /* *** CAMBIO AQUI para un estilo más elegante y minimalista en los filtros *** */
+    font-family: 'Titania Regular', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: #ffcc00; /* Un dorado suave para los títulos de filtro */
+    /* text-shadow: 0 0 5px rgba(255, 255, 0, 0.5); /* REMOVIDO */
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.4); /* Sombra muy sutil */
 }
 
 .searchInput,
 .filterSelect {
-  width: 100%;
-  padding: 0.8rem;
-  margin-top: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  font-size: 1rem;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-repeat: no-repeat;
-  background-position: right 0.8rem center;
-  background-size: 0.8em;
-  padding-right: 2.5rem;
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 0.8em;
+    padding-right: 2.5rem;
 }
 
 .searchInput::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .searchInput:focus,
 .filterSelect:focus {
-  outline: none;
-  border-color: yellow;
-  box-shadow: 0 0 0 2px rgba(255, 255, 0, 0.3);
+    outline: none;
+    border-color: #ffcc00; /* Color de borde de enfoque que coincide con los títulos */
+    box-shadow: 0 0 0 2px rgba(255, 255, 0, 0.1); /* Sombra de enfoque más sutil */
 }
 
 .createAuctionSection {
-  width: 100%;
-  margin-top: 1rem;
-  text-align: center;
+    display: none;
 }
 
-.createAuctionButton {
-  width: 100%;
-  padding: 1rem 1.5rem;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 0.75rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+/* Contenedor principal para la grilla de cartas */
+.auctionGridContainer {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.75rem;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+    padding: 1.5rem;
+    box-sizing: border-box;
 }
 
-.createAuctionButton:hover {
-  background-color: #45a049;
-  transform: translateY(-2px);
-}
-
-.createAuctionButton:active {
-  background-color: #3e8e41;
-  transform: translateY(0);
+/* Sección central con sidebar y área de contenido */
+.auctionCenterSection {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Área principal de contenido para las cartas de subasta */
 .auctionContentArea {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  order: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    order: 2;
 }
 
 /* Grilla de cartas de subasta */
 .auctionCardsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.5rem;
-  width: 100%;
-  padding-bottom: 1rem; /* Pequeño padding al final de la grilla */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    padding-bottom: 1rem;
 }
 
 /* Contenedor individual de la carta de subasta */
 .auctionCardContainer {
-  position: relative;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  cursor: pointer;
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  perspective: 1000px;
-  height: 380px;
+    position: relative;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    perspective: 1000px;
+    height: 380px;
 }
 
 .auctionCardContainer:hover {
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.377), 0 0 25px rgba(255, 255, 255, 0.1) inset;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.377), 0 0 25px rgba(255, 255, 255, 0.1) inset;
 }
 
 .auctionCardImageWrapper {
-  position: relative;
-  width: 100%;
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 0.75rem 0.75rem 0 0;
+    position: relative;
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 0.75rem 0.75rem 0 0;
 }
 
 .tcgCardImage {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .auctionCardInfo {
-  width: 100%;
-  min-height: 90px;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 0.5rem;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  box-sizing: border-box;
-  flex-shrink: 0;
+    width: 100%;
+    min-height: 90px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 0.5rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 .auctionCardName {
-  font-family: 'Titania Regular', sans-serif;
-  font-size: 1.1rem;
-  margin-bottom: 0.2rem;
-  color: yellow;
-  text-shadow: 0 0 3px rgba(255, 255, 0, 0.5);
-  line-height: 1.2;
-  white-space: normal;
-  word-wrap: break-word;
+    font-family: 'Titania Regular', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+    color: #ffcc00; /* Un dorado suave para los nombres de las cartas */
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+    line-height: 1.2;
+    white-space: normal;
+    word-wrap: break-word;
 }
 
 .auctionCardPrice {
-  font-size: 0.95rem;
-  font-weight: bold;
-  color: #aaffaa;
-  margin-bottom: 0.2rem;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #aaffaa;
+    margin-bottom: 0.2rem;
 }
 
 .auctionCardTime {
-  font-size: 0.85rem;
-  color: #cccccc;
+    font-size: 0.85rem;
+    color: #cccccc;
 }
 
 .verifiedIcon {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  font-size: 1.5rem;
-  color: gold;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
-  z-index: 10;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.5rem;
+    color: gold;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    z-index: 10;
 }
 
-.noResultsMessage {
-  color: white;
-  font-size: 1.2rem;
-  text-align: center;
-  width: 100%;
-  padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 0.75rem;
+.noAuctionsMessage {
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 100%;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 0.75rem;
 }
 
 /* Sección de contenido desplazable */
 .auctionScrollableContent {
-  width: 90%;
-  max-width: 1400px;
-  margin: 2rem auto; /* Ajustar margen para que esté debajo del nuevo contenedor */
-  padding: 1rem 2rem;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 0.75rem;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  color: white;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 90%;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 0.75rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .auctionScrollableContent h3 {
-  font-family: 'Titania Regular', sans-serif;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: yellow;
-  text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+    font-family: 'Titania Regular', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #e0e0e0; /* Un blanco roto similar al título principal */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra sutil */
 }
 
 .auctionFooter {
-  width: 100%;
-  height: 80px;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Titania Regular', sans-serif;
-  font-size: 1.1rem;
-  margin-top: auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Titania Regular', sans-serif;
+    font-size: 1.1rem;
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Media Queries para la página de Subastas */
 @media (max-width: 1024px) {
-  .auctionGridContainer {
-    width: 95%; /* Ocupa más ancho en móvil */
-    padding: 1rem; /* Reduce el padding interno en móvil */
-  }
+    .auctionTopRow {
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1.5rem;
+    }
 
-  .auctionCenterSection {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 0; /* Ya no necesita padding interno */
-  }
+    .auctionTitle {
+        font-size: 3.5rem;
+        text-align: left;
+        width: auto;
+        flex-basis: auto;
+        flex-grow: 1;
+        min-width: 0;
+    }
 
-  .auctionSidebarLeft {
-    width: 90%;
-    padding: 1rem;
-    order: 1;
-  }
+    .auctionButtonsGroup {
+        flex-direction: row;
+        justify-content: flex-end;
+        width: auto;
+        margin-top: 0;
+        flex-basis: auto;
+        gap: 1rem;
+    }
 
-  .auctionContentArea {
-    width: 100%;
-    padding: 0; /* Ya no necesita padding lateral */
-    order: 2;
-  }
+    .createAuctionTopButton,
+    .victoriesTopButton {
+        font-size: 1.2rem;
+        padding: 0.7rem 1rem;
+    }
 
-  .auctionCardsGrid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1rem;
-    max-width: 100%;
-  }
+    .auctionFiltersBar {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1.5rem;
+        width: 95%;
+    }
 
-  .auctionCardContainer {
-    height: 320px;
-  }
+    .filterSection {
+        width: 100%;
+        min-width: unset;
+    }
 
-  .auctionCardName {
-    font-size: 1rem;
-  }
+    .auctionGridContainer {
+        width: 95%;
+        padding: 1rem;
+    }
 
-  .auctionCardPrice {
-    font-size: 0.9rem;
-  }
+    .auctionCenterSection {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 0;
+    }
 
-  .auctionCardTime {
-    font-size: 0.8rem;
-  }
+    .auctionContentArea {
+        width: 100%;
+        padding: 0;
+        order: 2;
+    }
 
-  .verifiedIcon {
-    font-size: 1.2rem;
-    top: 0.3rem;
-    right: 0.3rem;
-  }
+    .auctionCardsGrid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+        max-width: 100%;
+    }
 
-  .auctionScrollableContent {
-    margin: 1rem auto;
-    padding: 0.8rem 1rem;
-    width: 95%; /* Ajusta el ancho para móvil */
-  }
+    .auctionCardContainer {
+        height: 320px;
+    }
 
-  .auctionScrollableContent h3 {
-    font-size: 1.7rem;
-  }
+    .auctionCardName {
+        font-size: 1rem;
+    }
+
+    .auctionCardPrice {
+        font-size: 0.9rem;
+    }
+
+    .auctionCardTime {
+        font-size: 0.8rem;
+    }
+
+    .verifiedIcon {
+        font-size: 1.2rem;
+        top: 0.3rem;
+        right: 0.3rem;
+    }
+
+    .auctionScrollableContent {
+        margin: 1rem auto;
+        padding: 0.8rem 1rem;
+        width: 95%;
+    }
+
+    .auctionScrollableContent h3 {
+        font-size: 1.7rem;
+    }
 }
 
 @media (max-width: 768px) {
-  .auctionTitle {
-    font-size: 2rem;
-  }
+    .auctionTopRow {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+    }
 
-  .auctionGridContainer {
-    width: 98%; /* Ocupa casi todo el ancho en móvil muy pequeño */
-    padding: 0.8rem; /* Reduce aún más el padding */
-  }
+    .auctionTitle {
+        font-size: 2.8rem;
+        text-align: center;
+        margin-bottom: 0.5rem;
+        width: 100%;
+    }
 
-  .auctionSidebarLeft {
-    width: 95%;
-  }
+    .auctionButtonsGroup { 
+        transform: translateY(0); 
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        margin-right: 0;
+        max-height: none;
+        transition: none;
+        opacity: 1;
+        pointer-events: all;
+        overflow: visible;
+    }
 
-  .auctionCardsGrid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  }
+    .createAuctionTopButton,
+    .victoriesTopButton {
+        font-size: 1rem;
+        padding: 0.5rem 0.8rem;
+        border-radius: 0.8rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
 
-  .auctionCardContainer {
-    height: 280px;
-  }
+    .auctionGridContainer {
+        width: 98%;
+        padding: 0.8rem;
+    }
 
-  .auctionCardName {
-    font-size: 0.95rem;
-  }
+    .auctionCardsGrid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
 
-  .auctionCardPrice {
-    font-size: 0.85rem;
-  }
+    .auctionCardContainer {
+        height: 280px;
+    }
 
-  .auctionCardTime {
-    font-size: 0.75rem;
-  }
+    .auctionCardName {
+        font-size: 0.95rem;
+    }
+
+    .auctionCardPrice {
+        font-size: 0.85rem;
+    }
+
+    .auctionCardTime {
+        font-size: 0.75rem;
+    }
+
+    .auctionFiltersBar {
+        padding: 0.8rem;
+    }
 }
