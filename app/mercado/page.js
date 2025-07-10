@@ -5,8 +5,11 @@ import Header from '../components/Header';
 import LoadingCards from '../components/LoadingCards';
 import MercadoCard from '../components/MercadoCard';
 import mercadoStyles from './Mercado.module.css';
+import { useRouter } from 'next/navigation'; // Importa useRouter
 
 export default function MercadoPage() {
+    const router = useRouter(); // Inicializa el router
+
     const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -124,8 +127,9 @@ export default function MercadoPage() {
         setCurrentPage(1);
     }, [searchTerm, filterGameType, filterPriceRange, filterVerified, filterRarity]);
 
+    // MODIFICACIÓN: Ahora navega a la nueva página /new-sale
     const handleSellButtonClick = () => {
-        alert("La funcionalidad para vender cartas está en desarrollo.");
+        router.push('/new-sale'); // Navega a la nueva ruta para vender cartas
     };
 
     const getGameTypeOptions = () => ['all', 'pokemon', 'one-piece', 'dragon-ball-fusion', 'digimon', 'magic', 'union-arena', 'gundam'];

@@ -7,7 +7,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    overflow: hidden;
+    overflow-x: hidden; /* Evita el scroll horizontal */
+    overflow-y: auto; /* Permite el scroll vertical solo si es necesario */
     background-color: #1a1a1a;
 }
 
@@ -44,6 +45,8 @@
     padding-top: 20px;
     color: white;
     box-sizing: border-box;
+    /* Ajuste para evitar que el contenido empuje el footer */
+    min-height: calc(100vh - 80px); /* Resta la altura del footer */
 }
 
 /* ESTILOS PARA PANTALLAS DE CARGA Y ERROR */
@@ -62,7 +65,7 @@
 .auctionTopRow {
     width: 90%;
     max-width: 1400px;
-    margin: 3rem auto 1.5rem auto;
+    margin: 1.5rem auto 1rem auto; /* Ajustado el margen superior e inferior */
     display: flex;
     /* Siempre justificado a la izquierda con botones a la derecha */
     justify-content: space-between; 
@@ -76,7 +79,7 @@
 .auctionTitle {
     /* *** CAMBIO AQUI para un estilo más elegante y minimalista *** */
     color: #e0e0e0; /* Blanco roto para un toque suave */
-    font-size: 5rem; /* Tamaño de fuente para PC */
+    font-size: 4rem; /* Reducido el tamaño de la fuente */
     font-weight: bold;
     /* text-shadow: 0 0 15px rgba(255, 255, 0, 0.7), 0 0 5px rgba(255, 255, 0, 0.5); /* REMOVIDO */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra sutil para profundidad */
@@ -177,8 +180,8 @@
 }
 
 .filterSelect option {
-    background-color: #000000 !important;
-    color: white !important;
+    background-color: #444 !important; /* Asegura un fondo oscuro */
+    color: white !important; /* Asegura texto blanco */
     padding: 0.5rem;
     border: none !important;
     text-shadow: none !important;
@@ -511,70 +514,336 @@
 }
 
 @media (max-width: 768px) {
-    .auctionTopRow {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0.8rem;
+    .auctionTopRow { /* Ajuste para el top row en pantallas pequeñas */
+        margin-top: 1.5rem; /* Reduce el margen superior */
+        margin-bottom: 1rem; /* Reduce el margen inferior */
     }
 
     .auctionTitle {
-        font-size: 2.8rem;
-        text-align: center;
-        margin-bottom: 0.5rem;
+        font-size: 2.5rem; /* Reduce el tamaño de la fuente del título */
+        margin-bottom: 0.3rem; /* Ajusta el margen inferior del título */
+    }
+
+    .newAuctionFormContainer {
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .formLeft, .formRight {
+        min-width: unset;
         width: 100%;
     }
 
-    .auctionButtonsGroup { 
-        transform: translateY(0); 
+    .initialValueSection {
         flex-direction: column;
-        justify-content: center;
-        width: 100%;
-        gap: 0.5rem;
-        margin-top: 0.5rem;
-        margin-right: 0;
-        max-height: none;
-        transition: none;
-        opacity: 1;
-        pointer-events: all;
-        overflow: visible;
+        align-items: stretch;
     }
 
-    .createAuctionTopButton,
-    .victoriesTopButton {
+    .initialValueInput, .submitBidButton {
+        width: 100%;
+        flex-grow: 0;
+    }
+
+    .fieldLabel {
+        font-size: 1rem;
+    }
+
+    .formInput, .formSelect, .initialValueInput {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .submitBidButton {
+        font-size: 1.2rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .cardInfoSection {
+        padding: 1rem;
+    }
+
+    .cardInfoTitle {
+        font-size: 1.1rem;
+    }
+
+    .backButton {
         font-size: 1rem;
         padding: 0.5rem 0.8rem;
-        border-radius: 0.8rem;
+    }
+}
+
+/* Estilos específicos para la página de Nueva Subasta */
+.newAuctionFormContainer {
+    width: 90%;
+    max-width: 800px; /* Reducido el ancho máximo del formulario */
+    margin: 1.5rem auto 2rem auto; /* Ajustado el margen superior e inferior */
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+    padding: 2rem; /* Reducido el padding */
+    display: flex;
+    gap: 2rem; /* Reducido el gap */
+    color: white;
+    box-sizing: border-box;
+    /* Ajuste para que el formulario no se desborde */
+    flex-shrink: 0; /* Evita que el formulario se encoja más allá de su contenido */
+}
+
+.formLeft {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 250px;
+}
+
+.imageUploadBox {
+    width: 100%;
+    padding-bottom: 100%; /* Crea una caja cuadrada */
+    position: relative;
+    border: 3px dotted rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.imageUploadBox span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.uploadedImagePreview {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Asegura que la imagen se vea completa */
+    top: 0;
+    left: 0;
+}
+
+.hiddenInput {
+    display: none;
+}
+
+.formRight {
+    flex: 1.5; /* Más espacio para los detalles */
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem; /* Reducido el gap */
+    min-width: 300px;
+}
+
+.formField {
+    margin-bottom: 0.5rem; /* Reducido el margen inferior */
+}
+
+.fieldLabel {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #ffcc00; /* Dorado para las etiquetas */
+    font-family: 'Titania Regular', sans-serif;
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.4);
+}
+
+.formInput,
+.formSelect {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: #333; /* Fondo oscuro para el select */
+    color: #fff; /* Texto blanco para el select */
+    font-size: 1rem;
+    box-sizing: border-box;
+    -webkit-appearance: none; /* Elimina estilos por defecto en select */
+    -moz-appearance: none;
+    appearance: none;
+    /* Añade una flecha personalizada para mejor control visual */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+}
+
+.formInput::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.formInput:focus,
+.formSelect:focus,
+.initialValueInput:focus {
+    outline: none;
+    border-color: #ffcc00;
+    box-shadow: 0 0 0 2px rgba(255, 255, 0, 0.1);
+}
+
+.sellerInfo,
+.locationInfo {
+    font-size: 0.95rem;
+    color: #bbb;
+    margin-bottom: 0.5rem;
+}
+
+.cardInfoSection {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 0.75rem;
+    padding: 1.2rem; /* Reducido el padding */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cardInfoTitle {
+    font-family: 'Titania Regular', sans-serif;
+    font-size: 1.2rem; /* Reducido el tamaño de la fuente */
+    color: #e0e0e0;
+    margin-top: 0;
+    margin-bottom: 1rem; /* Reducido el margen inferior */
+    text-align: center;
+}
+
+.formFieldInline {
+    display: flex;
+    flex-direction: column; /* Apila etiqueta y input */
+    margin-bottom: 0.8rem; /* Reducido el margen inferior */
+}
+
+.initialValueSection {
+    display: flex;
+    align-items: flex-end; /* Alinea los elementos en la parte inferior */
+    gap: 0.8rem; /* Reducido el gap */
+    margin-top: 1.5rem; /* Reducido el margen superior */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+}
+
+.initialValueInput {
+    flex-grow: 1; /* Permite que el input crezca */
+    min-width: 120px; /* Ancho mínimo para el input */
+    padding: 0.7rem 0.9rem; /* Reducido el padding */
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem; /* Reducido el tamaño de la fuente */
+    box-sizing: border-box;
+}
+
+.submitBidButton { /* Reutilizamos el nombre de la clase, pero este es el botón "Subastar" del formulario */
+    background-color: #fd7e14; /* Color similar al botón de victorias */
+    color: white;
+    font-size: 1.3rem; /* Reducido el tamaño de la fuente */
+    font-weight: bold;
+    padding: 0.7rem 1.5rem; /* Reducido el padding */
+    border: none;
+    border-radius: 1rem; /* Reducido el border-radius */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    flex-shrink: 0; /* No permite que el botón se encoja */
+}
+
+.submitBidButton:hover {
+    background-color: #e66900;
+}
+
+.backButton {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 0.6rem 1rem; /* Reducido el padding */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.7rem; /* Reducido el border-radius */
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    font-size: 1rem; /* Reducido el tamaño de la fuente */
+    font-family: 'Titania Regular', sans-serif;
+}
+
+.backButton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Media Queries para la página de Nueva Subasta */
+@media (max-width: 1024px) {
+    .auctionTopRow {
+        margin: 1rem auto 0.8rem auto; /* Ajustado el margen para pantallas más pequeñas */
+    }
+
+    .auctionTitle {
+        font-size: 3.2rem; /* Ajustado para pantallas más pequeñas */
+    }
+
+    .newAuctionFormContainer {
+        padding: 1.8rem; /* Ajustado el padding */
+        gap: 1.8rem; /* Ajustado el gap */
+    }
+
+    .formLeft, .formRight {
+        min-width: unset;
         width: 100%;
-        box-sizing: border-box;
     }
 
-    .auctionGridContainer {
-        width: 98%;
-        padding: 0.8rem;
+    .initialValueSection {
+        flex-direction: column;
+        align-items: stretch;
     }
 
-    .auctionCardsGrid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    .initialValueInput, .submitBidButton {
+        width: 100%;
+        flex-grow: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .auctionTopRow { /* Ajuste para el top row en pantallas pequeñas */
+        margin-top: 1rem; /* Reduce el margen superior */
+        margin-bottom: 0.5rem; /* Reduce el margen inferior */
     }
 
-    .auctionCardContainer {
-        height: 280px;
+    .auctionTitle {
+        font-size: 2.2rem; /* Reduce el tamaño de la fuente del título */
+        margin-bottom: 0.2rem; /* Ajusta el margen inferior del título */
     }
 
-    .auctionCardName {
-        font-size: 0.95rem;
+    .newAuctionFormContainer {
+        padding: 1rem; /* Reducido el padding */
+        gap: 1rem; /* Reducido el gap */
     }
 
-    .auctionCardPrice {
-        font-size: 0.85rem;
+    .fieldLabel {
+        font-size: 0.9rem; /* Reducido el tamaño de la fuente */
     }
 
-    .auctionCardTime {
-        font-size: 0.75rem;
+    .formInput, .formSelect, .initialValueInput {
+        padding: 0.5rem 0.7rem; /* Reducido el padding */
+        font-size: 0.85rem; /* Reducido el tamaño de la fuente */
     }
 
-    .auctionFiltersBar {
-        padding: 0.8rem;
+    .submitBidButton {
+        font-size: 1.1rem; /* Reducido el tamaño de la fuente */
+        padding: 0.5rem 0.8rem; /* Reducido el padding */
+    }
+
+    .cardInfoSection {
+        padding: 0.8rem; /* Reducido el padding */
+    }
+
+    .cardInfoTitle {
+        font-size: 1rem; /* Reducido el tamaño de la fuente */
+        margin-bottom: 0.8rem; /* Reducido el margen inferior */
+    }
+
+    .backButton {
+        font-size: 0.9rem; /* Reducido el tamaño de la fuente */
+        padding: 0.4rem 0.7rem; /* Reducido el padding */
     }
 }

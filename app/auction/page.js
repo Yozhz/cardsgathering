@@ -135,12 +135,9 @@ export default function AuctionPage() {
     setSelectedCard(null);
   };
 
+  // MODIFICACIÓN: Ahora navega a la nueva página /new-auction
   const handleCreateAuctionClick = () => {
-    console.log("Funcionalidad de crear subasta en desarrollo!");
-    // NOTA AL BACKEND:
-    // - Esta acción debe llevar a un formulario para crear una nueva subasta.
-    // - Necesitará endpoints para subir imágenes, validar datos de la carta, establecer precio inicial, duración, etc.
-    alert("La funcionalidad para crear subastas está en desarrollo.");
+    router.push('/new-auction'); // Navega a la nueva ruta para crear subastas
   };
 
   // NUEVA FUNCIÓN para navegar a la página de victorias
